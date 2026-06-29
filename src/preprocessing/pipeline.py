@@ -1,19 +1,26 @@
 """Preprocessing pipeline builder.
 
-This module defines the interfaces for assembling feature transformations and data validation
-steps used during training and inference workflows.
+This module exposes a reusable entry point for composing the preprocessing steps
+used during model training and inference.
 """
+
+from __future__ import annotations
 
 from typing import Any, Dict
 
+from .preprocessing_pipeline import PreprocessingPipeline
 
-def build_preprocessing_pipeline(config: Dict[str, Any]) -> Any:
-    """Build and return a preprocessing pipeline.
 
-    Parameters:
-        config: A dictionary describing preprocessing options and feature settings.
+def build_preprocessing_pipeline(config: Dict[str, Any] | None = None) -> PreprocessingPipeline:
+    """Build and return a configured preprocessing pipeline.
+
+    Args:
+        config: Optional dictionary describing preprocessing options.
 
     Returns:
-        A pipeline object that transforms raw clinical data into model-ready features.
+        A configured preprocessing pipeline instance.
     """
-    raise NotImplementedError("Preprocessing pipeline construction is not implemented yet.")
+    config = config or {}
+    target_column = config.get("target_column", "Diabetes_binary")
+    logger = config.get("logger")
+    return PreprocessingPipeline(target_column=target_column, logger=logger)
