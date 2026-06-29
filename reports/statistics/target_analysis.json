@@ -1,0 +1,20 @@
+{
+  "target_column": "Diabetes_binary",
+  "class_distribution": {
+    "0": 218334,
+    "1": 35346
+  },
+  "class_percentages": {
+    "0": 86.07,
+    "1": 13.93
+  },
+  "class_counts": {
+    "0": 218334,
+    "1": 35346
+  },
+  "class_imbalance_ratio": 6.177049736886777,
+  "majority_class": 0,
+  "minority_class": 1,
+  "majority_count": 218334,
+  "minority_count": 35346
+}

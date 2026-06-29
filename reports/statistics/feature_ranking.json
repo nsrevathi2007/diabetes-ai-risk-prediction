@@ -1,0 +1,124 @@
+{
+  "mutual_information_scores": {
+    "HighBP": 0.05313998654195329,
+    "GenHlth": 0.05254433680457948,
+    "PhysActivity": 0.052415568560088666,
+    "AnyHealthcare": 0.05060871268604439,
+    "CholCheck": 0.04879901634266015,
+    "Fruits": 0.04225308877956735,
+    "Veggies": 0.04218279886662524,
+    "HighChol": 0.04065390136056579,
+    "BMI": 0.03082798741052617,
+    "Sex": 0.025711711624844424,
+    "Smoker": 0.024666743913618117,
+    "Age": 0.02358494806362854,
+    "Education": 0.023356521612037273,
+    "DiffWalk": 0.02272113365887618,
+    "Income": 0.021442824005686978,
+    "HeartDiseaseorAttack": 0.014241132315810923,
+    "PhysHlth": 0.014221587066626684,
+    "Stroke": 0.004306178259446236,
+    "MentHlth": 0.004184845312884766,
+    "HvyAlcoholConsump": 0.0027464464966711066,
+    "NoDocbcCost": 0.00024460002948401005
+  },
+  "chi_square_scores": {},
+  "combined_ranking": {
+    "HighBP": {
+      "mutual_information": 0.05313998654195329,
+      "chi_square": 0.0
+    },
+    "GenHlth": {
+      "mutual_information": 0.05254433680457948,
+      "chi_square": 0.0
+    },
+    "PhysActivity": {
+      "mutual_information": 0.052415568560088666,
+      "chi_square": 0.0
+    },
+    "AnyHealthcare": {
+      "mutual_information": 0.05060871268604439,
+      "chi_square": 0.0
+    },
+    "CholCheck": {
+      "mutual_information": 0.04879901634266015,
+      "chi_square": 0.0
+    },
+    "Fruits": {
+      "mutual_information": 0.04225308877956735,
+      "chi_square": 0.0
+    },
+    "Veggies": {
+      "mutual_information": 0.04218279886662524,
+      "chi_square": 0.0
+    },
+    "HighChol": {
+      "mutual_information": 0.04065390136056579,
+      "chi_square": 0.0
+    },
+    "BMI": {
+      "mutual_information": 0.03082798741052617,
+      "chi_square": 0.0
+    },
+    "Sex": {
+      "mutual_information": 0.025711711624844424,
+      "chi_square": 0.0
+    },
+    "Smoker": {
+      "mutual_information": 0.024666743913618117,
+      "chi_square": 0.0
+    },
+    "Age": {
+      "mutual_information": 0.02358494806362854,
+      "chi_square": 0.0
+    },
+    "Education": {
+      "mutual_information": 0.023356521612037273,
+      "chi_square": 0.0
+    },
+    "DiffWalk": {
+      "mutual_information": 0.02272113365887618,
+      "chi_square": 0.0
+    },
+    "Income": {
+      "mutual_information": 0.021442824005686978,
+      "chi_square": 0.0
+    },
+    "HeartDiseaseorAttack": {
+      "mutual_information": 0.014241132315810923,
+      "chi_square": 0.0
+    },
+    "PhysHlth": {
+      "mutual_information": 0.014221587066626684,
+      "chi_square": 0.0
+    },
+    "Stroke": {
+      "mutual_information": 0.004306178259446236,
+      "chi_square": 0.0
+    },
+    "MentHlth": {
+      "mutual_information": 0.004184845312884766,
+      "chi_square": 0.0
+    },
+    "HvyAlcoholConsump": {
+      "mutual_information": 0.0027464464966711066,
+      "chi_square": 0.0
+    },
+    "NoDocbcCost": {
+      "mutual_information": 0.00024460002948401005,
+      "chi_square": 0.0
+    }
+  },
+  "top_10_features": [
+    "HighBP",
+    "GenHlth",
+    "PhysActivity",
+    "AnyHealthcare",
+    "CholCheck",
+    "Fruits",
+    "Veggies",
+    "HighChol",
+    "BMI",
+    "Sex"
+  ]
+}
