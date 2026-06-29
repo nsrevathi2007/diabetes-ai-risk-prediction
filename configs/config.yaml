@@ -1,0 +1,80 @@
+# Data Ingestion Configuration
+data_ingestion:
+  raw_data_path: "data/raw/diabetes_binary_health_indicators_BRFSS2015.csv"
+  processed_data_path: "data/processed/diabetes_binary_health_indicators_cleaned.csv"
+  
+  # Validation settings
+  validation:
+    check_missing_values: true
+    check_duplicates: true
+    check_infinite_values: true
+    check_data_types: true
+    check_file_exists: true
+    check_empty_dataset: true
+    
+  # Logging settings
+  logging:
+    level: "INFO"
+    log_dir: "logs"
+    log_file: "data_ingestion.log"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    
+  # Report settings
+  reporting:
+    output_dir: "docs"
+    markdown_report: "data_quality_report.md"
+    json_report: "data_quality_report.json"
+    include_statistics: true
+    include_dtypes: true
+    include_missing_analysis: true
+
+# Schema configuration
+schema:
+  target_column: "Diabetes_binary"
+  expected_columns:
+    - Diabetes_binary
+    - HighBP
+    - HighChol
+    - CholCheck
+    - BMI
+    - Smoker
+    - Stroke
+    - HeartDiseaseorAttack
+    - PhysActivity
+    - Fruits
+    - Veggies
+    - HvyAlcoholConsump
+    - AnyHealthcare
+    - NoDocbcCost
+    - GenHlth
+    - MentHlth
+    - PhysHlth
+    - DiffWalk
+    - Sex
+    - Age
+    - Education
+    - Income
+  
+  expected_dtypes:
+    Diabetes_binary: "float64"
+    HighBP: "float64"
+    HighChol: "float64"
+    CholCheck: "float64"
+    BMI: "float64"
+    Smoker: "float64"
+    Stroke: "float64"
+    HeartDiseaseorAttack: "float64"
+    PhysActivity: "float64"
+    Fruits: "float64"
+    Veggies: "float64"
+    HvyAlcoholConsump: "float64"
+    AnyHealthcare: "float64"
+    NoDocbcCost: "float64"
+    GenHlth: "float64"
+    MentHlth: "float64"
+    PhysHlth: "float64"
+    DiffWalk: "float64"
+    Sex: "float64"
+    Age: "float64"
+    Education: "float64"
+    Income: "float64"
