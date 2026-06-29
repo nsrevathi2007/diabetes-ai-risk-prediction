@@ -14,22 +14,11 @@ def compare_imbalance_strategies(
     df: pd.DataFrame, target_column: str = "Diabetes_binary"
 ) -> dict[str, Any]:
     """Compare original data and the supported oversampling/undersampling strategies."""
-    strategies = {
-        "Original": None,
-        "SMOTE": SMOTE(random_state=42),
-        "SMOTEENN": SMOTEENN(random_state=42),
-        "RandomUnderSampler": RandomUnderSampler(random_state=42),
-    }
-
     results: dict[str, Any] = {}
-    for name, sampler in strategies.items():
-        if sampler is None:
-            X_resampled = df.drop(columns=[target_column])
-            y_resampled = df[target_column]
-        else:
-            X_resampled, y_resampled = sampler.fit_resample(
-                df.drop(columns=[target_column]), df[target_column]
-            )
+    for name in get_imbalance_strategy_names():
+        X_resampled, y_resampled = apply_imbalance_strategy(
+            df.drop(columns=[target_column]), df[target_column], name
+        )
 
         results[name] = {
             "rows": int(len(X_resampled)),
@@ -40,3 +29,34 @@ def compare_imbalance_strategies(
         }
 
     return results
+
+
+def get_imbalance_strategy_names() -> list[str]:
+    """Return supported imbalance strategy names."""
+    return ["Original", "SMOTE", "SMOTEENN", "RandomUnderSampler"]
+
+
+def apply_imbalance_strategy(
+    X: pd.DataFrame,
+    y: pd.Series,
+    strategy_name: str,
+    random_state: int = 42,
+) -> tuple[pd.DataFrame, pd.Series]:
+    """Apply an imbalance strategy to a feature matrix and target vector."""
+    if strategy_name == "Original":
+        return X.copy(), y.copy()
+
+    sampler = _build_sampler(strategy_name, random_state=random_state)
+    X_resampled, y_resampled = sampler.fit_resample(X, y)
+    return pd.DataFrame(X_resampled, columns=X.columns), pd.Series(y_resampled, name=y.name)
+
+
+def _build_sampler(strategy_name: str, random_state: int) -> Any:
+    """Build an imbalanced-learn sampler by name."""
+    if strategy_name == "SMOTE":
+        return SMOTE(random_state=random_state)
+    if strategy_name == "SMOTEENN":
+        return SMOTEENN(random_state=random_state)
+    if strategy_name == "RandomUnderSampler":
+        return RandomUnderSampler(random_state=random_state)
+    raise ValueError(f"Unsupported imbalance strategy: {strategy_name}")

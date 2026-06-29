@@ -18,7 +18,10 @@ class OptunaOptimizer:
 
     def run_study(self, objective: Any) -> dict[str, Any]:
         """Run an Optuna study using the supplied objective function."""
-        study = optuna.create_study(direction="maximize")
+        study = optuna.create_study(
+            direction="maximize",
+            sampler=optuna.samplers.TPESampler(seed=self.random_state),
+        )
         study.optimize(objective, n_trials=self.n_trials)
         return {
             "best_value": float(study.best_value),
