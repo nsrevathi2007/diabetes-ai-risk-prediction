@@ -1,0 +1,10 @@
+risk_thresholds:
+  low: 0.25
+  moderate: 0.50
+  high: 0.75
+
+recommendation_settings:
+  top_factor_limit: 5
+  priority_action_limit: 5
+
+disclaimer: "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment."
