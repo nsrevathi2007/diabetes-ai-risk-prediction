@@ -29,7 +29,7 @@ class RecommendationReportGenerator:
         start_time = time.perf_counter()
         path = self.json_dir / f"{payload['patient_id']}.json"
         path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        self._log("Saved recommendation JSON at %s in %.2fs", path, time.perf_counter() - start_time)
+        self._log("Generated recommendation JSON at %s in %.2fs", path, time.perf_counter() - start_time)
         return path
 
     def write_markdown(self, payload: dict[str, Any]) -> Path:
@@ -52,7 +52,7 @@ class RecommendationReportGenerator:
             *self._factor_lines(payload.get("risk_factors", [])),
             "",
             "## Top Protective SHAP Factors",
-            *self._factor_lines(payload.get("positive_factors", [])),
+            *self._factor_lines(payload.get("protective_factors", [])),
             "",
             "## Priority Actions",
             *self._priority_lines(payload.get("priority_actions", [])),
@@ -61,7 +61,7 @@ class RecommendationReportGenerator:
             *self._recommendation_lines(payload.get("recommendations", {})),
             "",
             "## Positive Lifestyle Observations",
-            *[f"- {item}" for item in payload.get("positive_lifestyle_observations", [])],
+            *[f"- {item}" for item in payload.get("positive_observations", [])],
             "",
             "## Preventive Suggestions",
             *[f"- {item}" for item in payload.get("preventive_suggestions", [])],
@@ -77,16 +77,16 @@ class RecommendationReportGenerator:
         """Format SHAP factors for markdown."""
         if not factors:
             return ["- No important factors identified."]
-        return [
-            f"- {factor['feature']}: SHAP {float(factor['shap_value']):.4f}"
-            for factor in factors
-        ]
+        return [f"- {factor['feature']}: SHAP {float(factor['shap_value']):.4f}" for factor in factors]
 
     def _priority_lines(self, actions: list[dict[str, Any]]) -> list[str]:
         """Format priority actions for markdown."""
         if not actions:
             return ["- Continue general wellness habits and preventive care."]
-        return [f"- {action['title']}: {action['reason']}" for action in actions]
+        return [
+            f"- [{action['priority']}] {action['title']}: {action['reason']}"
+            for action in actions
+        ]
 
     def _recommendation_lines(self, recommendations: dict[str, list[dict[str, Any]]]) -> list[str]:
         """Format grouped recommendations for markdown."""
@@ -97,7 +97,7 @@ class RecommendationReportGenerator:
         for category, entries in recommendations.items():
             lines.append(f"### {category.replace('_', ' ').title()}")
             for entry in entries:
-                lines.append(f"- {entry['title']}: {entry['recommendation']}")
+                lines.append(f"- [{entry['priority']}] {entry['title']}: {entry['recommendation']}")
         return lines
 
     def _log(self, message: str, *args: Any) -> None:

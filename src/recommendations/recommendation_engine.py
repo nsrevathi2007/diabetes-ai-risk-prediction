@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +11,7 @@ import yaml
 
 from .patient_profile import PatientProfile
 from .recommendation_rules import RecommendationRuleEngine
+from .schema import RecommendationPayload
 
 
 class RecommendationEngine:
@@ -34,7 +36,12 @@ class RecommendationEngine:
             logger: Optional project logger.
         """
         self.config = config
-        self.rule_engine = rule_engine or RecommendationRuleEngine(logger=logger)
+        settings = self.config.get("recommendation_settings", {})
+        priority_thresholds = settings.get("priority_thresholds", {})
+        self.rule_engine = rule_engine or RecommendationRuleEngine(
+            priority_thresholds=priority_thresholds,
+            logger=logger,
+        )
         self.logger = logger
 
     @classmethod
@@ -72,10 +79,12 @@ class RecommendationEngine:
         settings = self.config.get("recommendation_settings", {})
         top_factor_limit = int(settings.get("top_factor_limit", 5))
         priority_limit = int(settings.get("priority_action_limit", 5))
-        recommendations = self.rule_engine.evaluate(profile, top_factor_limit=top_factor_limit)
+        min_abs_shap_value = float(settings.get("min_abs_shap_value", 0.0))
+        filtered_profile = self._filter_profile_factors(profile, min_abs_shap_value)
+        recommendations = self.rule_engine.evaluate(filtered_profile, top_factor_limit=top_factor_limit)
         risk_level = self.categorize_risk(profile.prediction_probability)
         priority_actions = self._build_priority_actions(recommendations, priority_limit)
-        positive_observations = self.rule_engine.positive_observations(profile)
+        positive_observations = self.rule_engine.positive_observations(filtered_profile)
 
         payload = {
             "patient_id": profile.patient_id,
@@ -83,19 +92,20 @@ class RecommendationEngine:
             "risk_level": risk_level,
             "prediction_probability": profile.prediction_probability,
             "priority_actions": priority_actions,
+            "risk_factors": [asdict(factor) for factor in filtered_profile.risk_factors],
+            "protective_factors": [asdict(factor) for factor in filtered_profile.positive_factors],
             "recommendations": recommendations,
-            "positive_factors": [factor.__dict__ for factor in profile.positive_factors],
-            "risk_factors": [factor.__dict__ for factor in profile.risk_factors],
-            "positive_lifestyle_observations": positive_observations,
+            "positive_observations": positive_observations,
             "preventive_suggestions": self._preventive_suggestions(risk_level),
             "disclaimer": self.config.get("disclaimer", self.DEFAULT_DISCLAIMER),
         }
+        validated_payload = RecommendationPayload.model_validate(payload).model_dump(mode="json")
         self._log(
             "Generated recommendations for %s in %.2fs",
             profile.patient_id,
             time.perf_counter() - start_time,
         )
-        return payload
+        return validated_payload
 
     def _build_priority_actions(
         self,
@@ -111,9 +121,10 @@ class RecommendationEngine:
                         "category": entry["category"],
                         "title": entry["title"],
                         "reason": entry["reason"],
+                        "priority": entry["priority"],
                     }
                 )
-        return actions[:limit]
+        return sorted(actions, key=lambda action: self._priority_rank(action["priority"]))[:limit]
 
     def _preventive_suggestions(self, risk_level: str) -> list[str]:
         """Return non-diagnostic preventive suggestions by risk level."""
@@ -130,6 +141,33 @@ class RecommendationEngine:
         return [
             "Continue protective lifestyle habits and routine preventive care.",
         ]
+
+    def _filter_profile_factors(
+        self,
+        profile: PatientProfile,
+        min_abs_shap_value: float,
+    ) -> PatientProfile:
+        """Keep only meaningful SHAP factors for recommendations and output."""
+        return PatientProfile(
+            patient_id=profile.patient_id,
+            indicators=profile.indicators,
+            prediction=profile.prediction,
+            prediction_probability=profile.prediction_probability,
+            risk_factors=[
+                factor
+                for factor in profile.risk_factors
+                if abs(float(factor.shap_value)) >= min_abs_shap_value
+            ],
+            positive_factors=[
+                factor
+                for factor in profile.positive_factors
+                if abs(float(factor.shap_value)) >= min_abs_shap_value
+            ],
+        )
+
+    def _priority_rank(self, priority: str) -> int:
+        """Sort priorities from highest to lowest."""
+        return {"High": 0, "Medium": 1, "Low": 2}.get(priority, 3)
 
     def _log(self, message: str, *args: Any) -> None:
         """Log when a project logger is available."""

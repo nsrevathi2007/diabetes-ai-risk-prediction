@@ -16,8 +16,13 @@ from .recommendation_templates import (
 class RecommendationRuleEngine:
     """Evaluate feature-driven recommendation rules."""
 
-    def __init__(self, logger: Any | None = None) -> None:
+    def __init__(
+        self,
+        priority_thresholds: dict[str, Any] | None = None,
+        logger: Any | None = None,
+    ) -> None:
         """Initialize the rule engine."""
+        self.priority_thresholds = priority_thresholds or {}
         self.logger = logger
 
     def evaluate(
@@ -49,7 +54,10 @@ class RecommendationRuleEngine:
 
         if profile.prediction_probability >= 0.5:
             recommendations.setdefault("preventive_screening", [])
-            screening = self._build_general_recommendation("preventive_screening")
+            screening = self._build_general_recommendation(
+                "preventive_screening",
+                profile.prediction_probability,
+            )
             if screening not in recommendations["preventive_screening"]:
                 recommendations["preventive_screening"].append(screening)
 
@@ -87,12 +95,17 @@ class RecommendationRuleEngine:
             "title": template["title"],
             "recommendation": template["text"],
             "reason": f"{factor.feature} was an important contributor to the prediction.",
+            "priority": self._priority_from_shap(factor.shap_value),
             "feature": factor.feature,
             "feature_value": profile.get_indicator(factor.feature),
             "shap_value": factor.shap_value,
         }
 
-    def _build_general_recommendation(self, category: str) -> dict[str, Any]:
+    def _build_general_recommendation(
+        self,
+        category: str,
+        probability: float | None = None,
+    ) -> dict[str, Any]:
         """Build a recommendation entry not tied to one feature."""
         template = RECOMMENDATION_TEMPLATES[category]
         return {
@@ -100,6 +113,7 @@ class RecommendationRuleEngine:
             "title": template["title"],
             "recommendation": template["text"],
             "reason": "The predicted risk probability supports preventive follow-up.",
+            "priority": self._priority_from_probability(probability),
             "feature": None,
             "feature_value": None,
             "shap_value": None,
@@ -130,6 +144,31 @@ class RecommendationRuleEngine:
         if feature in {"Smoker", "HvyAlcoholConsump", "HighBP", "HighChol"}:
             return numeric_value == 0.0
         return False
+
+    def _priority_from_shap(self, shap_value: float | None) -> str:
+        """Assign recommendation priority from absolute SHAP impact."""
+        if shap_value is None:
+            return "Low"
+        abs_value = abs(float(shap_value))
+        high = float(self.priority_thresholds.get("high_abs_shap", 0.30))
+        medium = float(self.priority_thresholds.get("medium_abs_shap", 0.10))
+        if abs_value >= high:
+            return "High"
+        if abs_value >= medium:
+            return "Medium"
+        return "Low"
+
+    def _priority_from_probability(self, probability: float | None) -> str:
+        """Assign priority to general recommendations from probability."""
+        if probability is None:
+            return "Low"
+        high = float(self.priority_thresholds.get("high_probability", 0.75))
+        medium = float(self.priority_thresholds.get("medium_probability", 0.50))
+        if probability >= high:
+            return "High"
+        if probability >= medium:
+            return "Medium"
+        return "Low"
 
     def _log(self, message: str, *args: Any) -> None:
         """Log when a project logger is available."""

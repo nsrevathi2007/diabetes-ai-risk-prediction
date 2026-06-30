@@ -1,0 +1,203 @@
+{
+  "patient_id": "patient_10",
+  "prediction": "Low Diabetes Risk",
+  "risk_level": "Low Risk",
+  "prediction_probability": 0.068,
+  "priority_actions": [
+    {
+      "category": "weight_management",
+      "title": "Support healthy weight management",
+      "reason": "BMI was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "diet",
+      "title": "Strengthen everyday nutrition",
+      "reason": "BMI was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "exercise",
+      "title": "Increase safe physical activity",
+      "reason": "BMI was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "preventive_screening",
+      "title": "Stay current with preventive screening",
+      "reason": "Age was an important contributor to the prediction.",
+      "priority": "Medium"
+    },
+    {
+      "category": "follow_up",
+      "title": "Plan healthcare follow-up",
+      "reason": "Age was an important contributor to the prediction.",
+      "priority": "Medium"
+    }
+  ],
+  "risk_factors": [
+    {
+      "feature": "BMI",
+      "shap_value": 0.6745,
+      "direction": "increases_risk",
+      "value": 33.0
+    },
+    {
+      "feature": "Sex",
+      "shap_value": 0.1672,
+      "direction": "increases_risk",
+      "value": 1.0
+    },
+    {
+      "feature": "Age",
+      "shap_value": 0.1231,
+      "direction": "increases_risk",
+      "value": 8.0
+    },
+    {
+      "feature": "CholCheck",
+      "shap_value": 0.0632,
+      "direction": "increases_risk",
+      "value": 1.0
+    },
+    {
+      "feature": "MentHlth",
+      "shap_value": 0.052,
+      "direction": "increases_risk",
+      "value": 0.0
+    }
+  ],
+  "protective_factors": [
+    {
+      "feature": "HighBP",
+      "shap_value": -0.4583,
+      "direction": "reduces_risk",
+      "value": 0.0
+    },
+    {
+      "feature": "HighChol",
+      "shap_value": -0.2198,
+      "direction": "reduces_risk",
+      "value": 0.0
+    },
+    {
+      "feature": "GenHlth",
+      "shap_value": -0.1954,
+      "direction": "reduces_risk",
+      "value": 2.0
+    },
+    {
+      "feature": "Income",
+      "shap_value": -0.1636,
+      "direction": "reduces_risk",
+      "value": 8.0
+    },
+    {
+      "feature": "HeartDiseaseorAttack",
+      "shap_value": -0.0329,
+      "direction": "reduces_risk",
+      "value": 0.0
+    }
+  ],
+  "recommendations": {
+    "weight_management": [
+      {
+        "category": "weight_management",
+        "title": "Support healthy weight management",
+        "recommendation": "Consider gradual lifestyle changes that support a healthy weight, such as balanced meals, portion awareness, and consistent activity.",
+        "reason": "BMI was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "BMI",
+        "feature_value": 33.0,
+        "shap_value": 0.6745
+      }
+    ],
+    "diet": [
+      {
+        "category": "diet",
+        "title": "Strengthen everyday nutrition",
+        "recommendation": "Emphasize vegetables, fruits, whole grains, lean proteins, and minimally processed foods while limiting sugary drinks and highly refined carbohydrates.",
+        "reason": "BMI was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "BMI",
+        "feature_value": 33.0,
+        "shap_value": 0.6745
+      }
+    ],
+    "exercise": [
+      {
+        "category": "exercise",
+        "title": "Increase safe physical activity",
+        "recommendation": "Aim for regular moderate activity such as walking, cycling, or swimming as tolerated, and reduce long sitting periods.",
+        "reason": "BMI was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "BMI",
+        "feature_value": 33.0,
+        "shap_value": 0.6745
+      }
+    ],
+    "preventive_screening": [
+      {
+        "category": "preventive_screening",
+        "title": "Stay current with preventive screening",
+        "recommendation": "Discuss appropriate diabetes risk screening, cholesterol checks, and routine preventive care with a qualified healthcare professional.",
+        "reason": "Age was an important contributor to the prediction.",
+        "priority": "Medium",
+        "feature": "Age",
+        "feature_value": 8.0,
+        "shap_value": 0.1231
+      },
+      {
+        "category": "preventive_screening",
+        "title": "Stay current with preventive screening",
+        "recommendation": "Discuss appropriate diabetes risk screening, cholesterol checks, and routine preventive care with a qualified healthcare professional.",
+        "reason": "CholCheck was an important contributor to the prediction.",
+        "priority": "Low",
+        "feature": "CholCheck",
+        "feature_value": 1.0,
+        "shap_value": 0.0632
+      }
+    ],
+    "follow_up": [
+      {
+        "category": "follow_up",
+        "title": "Plan healthcare follow-up",
+        "recommendation": "Consider scheduling a non-urgent follow-up to review risk factors and prevention options with a qualified healthcare professional.",
+        "reason": "Age was an important contributor to the prediction.",
+        "priority": "Medium",
+        "feature": "Age",
+        "feature_value": 8.0,
+        "shap_value": 0.1231
+      }
+    ],
+    "stress": [
+      {
+        "category": "stress",
+        "title": "Manage stress and mental wellbeing",
+        "recommendation": "Use practical stress supports such as regular movement, relaxation techniques, social support, or professional counseling when needed.",
+        "reason": "MentHlth was an important contributor to the prediction.",
+        "priority": "Low",
+        "feature": "MentHlth",
+        "feature_value": 0.0,
+        "shap_value": 0.052
+      }
+    ]
+  },
+  "positive_observations": [
+    "Physical activity is a positive lifestyle signal.",
+    "Fruit consumption is a positive nutrition signal.",
+    "Vegetable consumption is a positive nutrition signal.",
+    "Avoiding heavy alcohol consumption is a positive health indicator.",
+    "No high blood pressure indicator was observed in the patient data.",
+    "No high cholesterol indicator was observed in the patient data.",
+    "HighBP appears protective in this prediction.",
+    "HighChol appears protective in this prediction.",
+    "GenHlth appears protective in this prediction.",
+    "Income appears protective in this prediction.",
+    "HeartDiseaseorAttack appears protective in this prediction."
+  ],
+  "preventive_suggestions": [
+    "Continue protective lifestyle habits and routine preventive care."
+  ],
+  "disclaimer": "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment."
+}

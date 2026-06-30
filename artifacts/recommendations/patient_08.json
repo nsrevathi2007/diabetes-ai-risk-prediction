@@ -1,0 +1,195 @@
+{
+  "patient_id": "patient_08",
+  "prediction": "Low Diabetes Risk",
+  "risk_level": "Low Risk",
+  "prediction_probability": 0.187,
+  "priority_actions": [
+    {
+      "category": "general_wellness",
+      "title": "Maintain protective routines",
+      "reason": "GenHlth was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "follow_up",
+      "title": "Plan healthcare follow-up",
+      "reason": "GenHlth was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "follow_up",
+      "title": "Plan healthcare follow-up",
+      "reason": "Age was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "preventive_screening",
+      "title": "Stay current with preventive screening",
+      "reason": "Age was an important contributor to the prediction.",
+      "priority": "High"
+    },
+    {
+      "category": "preventive_screening",
+      "title": "Stay current with preventive screening",
+      "reason": "HighChol was an important contributor to the prediction.",
+      "priority": "High"
+    }
+  ],
+  "risk_factors": [
+    {
+      "feature": "GenHlth",
+      "shap_value": 0.675,
+      "direction": "increases_risk",
+      "value": 3.0
+    },
+    {
+      "feature": "Age",
+      "shap_value": 0.5332,
+      "direction": "increases_risk",
+      "value": 10.0
+    },
+    {
+      "feature": "HighChol",
+      "shap_value": 0.3092,
+      "direction": "increases_risk",
+      "value": 1.0
+    },
+    {
+      "feature": "Sex",
+      "shap_value": 0.1541,
+      "direction": "increases_risk",
+      "value": 1.0
+    },
+    {
+      "feature": "CholCheck",
+      "shap_value": 0.0537,
+      "direction": "increases_risk",
+      "value": 1.0
+    }
+  ],
+  "protective_factors": [
+    {
+      "feature": "HighBP",
+      "shap_value": -0.4238,
+      "direction": "reduces_risk",
+      "value": 0.0
+    },
+    {
+      "feature": "Income",
+      "shap_value": -0.1235,
+      "direction": "reduces_risk",
+      "value": 8.0
+    },
+    {
+      "feature": "BMI",
+      "shap_value": -0.0928,
+      "direction": "reduces_risk",
+      "value": 27.0
+    },
+    {
+      "feature": "HeartDiseaseorAttack",
+      "shap_value": -0.0292,
+      "direction": "reduces_risk",
+      "value": 0.0
+    },
+    {
+      "feature": "DiffWalk",
+      "shap_value": -0.0249,
+      "direction": "reduces_risk",
+      "value": 0.0
+    }
+  ],
+  "recommendations": {
+    "general_wellness": [
+      {
+        "category": "general_wellness",
+        "title": "Maintain protective routines",
+        "recommendation": "Continue health-supporting habits and review changes in risk factors over time.",
+        "reason": "GenHlth was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "GenHlth",
+        "feature_value": 3.0,
+        "shap_value": 0.675
+      }
+    ],
+    "follow_up": [
+      {
+        "category": "follow_up",
+        "title": "Plan healthcare follow-up",
+        "recommendation": "Consider scheduling a non-urgent follow-up to review risk factors and prevention options with a qualified healthcare professional.",
+        "reason": "GenHlth was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "GenHlth",
+        "feature_value": 3.0,
+        "shap_value": 0.675
+      },
+      {
+        "category": "follow_up",
+        "title": "Plan healthcare follow-up",
+        "recommendation": "Consider scheduling a non-urgent follow-up to review risk factors and prevention options with a qualified healthcare professional.",
+        "reason": "Age was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "Age",
+        "feature_value": 10.0,
+        "shap_value": 0.5332
+      }
+    ],
+    "preventive_screening": [
+      {
+        "category": "preventive_screening",
+        "title": "Stay current with preventive screening",
+        "recommendation": "Discuss appropriate diabetes risk screening, cholesterol checks, and routine preventive care with a qualified healthcare professional.",
+        "reason": "Age was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "Age",
+        "feature_value": 10.0,
+        "shap_value": 0.5332
+      },
+      {
+        "category": "preventive_screening",
+        "title": "Stay current with preventive screening",
+        "recommendation": "Discuss appropriate diabetes risk screening, cholesterol checks, and routine preventive care with a qualified healthcare professional.",
+        "reason": "HighChol was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "HighChol",
+        "feature_value": 1.0,
+        "shap_value": 0.3092
+      },
+      {
+        "category": "preventive_screening",
+        "title": "Stay current with preventive screening",
+        "recommendation": "Discuss appropriate diabetes risk screening, cholesterol checks, and routine preventive care with a qualified healthcare professional.",
+        "reason": "CholCheck was an important contributor to the prediction.",
+        "priority": "Low",
+        "feature": "CholCheck",
+        "feature_value": 1.0,
+        "shap_value": 0.0537
+      }
+    ],
+    "diet": [
+      {
+        "category": "diet",
+        "title": "Strengthen everyday nutrition",
+        "recommendation": "Emphasize vegetables, fruits, whole grains, lean proteins, and minimally processed foods while limiting sugary drinks and highly refined carbohydrates.",
+        "reason": "HighChol was an important contributor to the prediction.",
+        "priority": "High",
+        "feature": "HighChol",
+        "feature_value": 1.0,
+        "shap_value": 0.3092
+      }
+    ]
+  },
+  "positive_observations": [
+    "Avoiding heavy alcohol consumption is a positive health indicator.",
+    "No high blood pressure indicator was observed in the patient data.",
+    "HighBP appears protective in this prediction.",
+    "Income appears protective in this prediction.",
+    "BMI appears protective in this prediction.",
+    "HeartDiseaseorAttack appears protective in this prediction.",
+    "DiffWalk appears protective in this prediction."
+  ],
+  "preventive_suggestions": [
+    "Continue protective lifestyle habits and routine preventive care."
+  ],
+  "disclaimer": "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment."
+}

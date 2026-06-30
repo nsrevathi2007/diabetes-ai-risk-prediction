@@ -6,5 +6,11 @@ risk_thresholds:
 recommendation_settings:
   top_factor_limit: 5
   priority_action_limit: 5
+  min_abs_shap_value: 0.02
+  priority_thresholds:
+    high_abs_shap: 0.30
+    medium_abs_shap: 0.10
+    high_probability: 0.75
+    medium_probability: 0.50
 
 disclaimer: "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment."
