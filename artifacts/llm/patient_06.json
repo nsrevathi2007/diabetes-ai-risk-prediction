@@ -1,0 +1,51 @@
+{
+  "patient_id": "patient_06",
+  "risk_level": "Moderate Risk",
+  "summary": "The model estimated this patient's diabetes risk as Moderate Risk with a prediction probability of 0.3982. This explanation summarizes the existing structured recommendation output.",
+  "why_this_prediction": "The main SHAP factors increasing the prediction were GenHlth, HighBP, BMI, HighChol, CholCheck. Protective SHAP factors reducing the prediction were AnyHealthcare, DiffWalk, HeartDiseaseorAttack, Sex, Income.",
+  "positive_observations": [
+    "Fruit consumption is a positive nutrition signal.",
+    "Vegetable consumption is a positive nutrition signal.",
+    "Not smoking is a positive health indicator.",
+    "Avoiding heavy alcohol consumption is a positive health indicator.",
+    "AnyHealthcare appears protective in this prediction.",
+    "DiffWalk appears protective in this prediction.",
+    "HeartDiseaseorAttack appears protective in this prediction.",
+    "Sex appears protective in this prediction.",
+    "Income appears protective in this prediction."
+  ],
+  "priority_actions": [
+    {
+      "title": "Maintain protective routines",
+      "priority": "High",
+      "explanation": "GenHlth was an important contributor to the prediction."
+    },
+    {
+      "title": "Plan healthcare follow-up",
+      "priority": "High",
+      "explanation": "GenHlth was an important contributor to the prediction."
+    },
+    {
+      "title": "Monitor blood pressure",
+      "priority": "High",
+      "explanation": "HighBP was an important contributor to the prediction."
+    },
+    {
+      "title": "Strengthen everyday nutrition",
+      "priority": "High",
+      "explanation": "HighBP was an important contributor to the prediction."
+    },
+    {
+      "title": "Strengthen everyday nutrition",
+      "priority": "High",
+      "explanation": "BMI was an important contributor to the prediction."
+    }
+  ],
+  "recommendation_explanation": "The structured recommendation engine produced guidance in these categories: general wellness, follow up, blood pressure, diet, exercise, weight management, preventive screening. These items are explanatory and educational only.",
+  "next_steps": "Maintain routine preventive checkups and monitor changes in health indicators. Focus on sustainable lifestyle habits that support metabolic health.",
+  "disclaimer": "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment.",
+  "generated_at": "2026-06-30T13:29:40.759808Z",
+  "generation_mode": "template",
+  "model": "gpt-4o-mini",
+  "source_recommendation_count": 11
+}

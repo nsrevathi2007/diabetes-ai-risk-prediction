@@ -1,0 +1,52 @@
+{
+  "patient_id": "patient_02",
+  "risk_level": "Low Risk",
+  "summary": "The model estimated this patient's diabetes risk as Low Risk with a prediction probability of 0.2182. This explanation summarizes the existing structured recommendation output.",
+  "why_this_prediction": "The main SHAP factors increasing the prediction were HighBP, GenHlth, HighChol, Age, CholCheck. Protective SHAP factors reducing the prediction were Sex, Education, Income, HeartDiseaseorAttack, Fruits.",
+  "positive_observations": [
+    "Physical activity is a positive lifestyle signal.",
+    "Fruit consumption is a positive nutrition signal.",
+    "Vegetable consumption is a positive nutrition signal.",
+    "Not smoking is a positive health indicator.",
+    "Avoiding heavy alcohol consumption is a positive health indicator.",
+    "Sex appears protective in this prediction.",
+    "Education appears protective in this prediction.",
+    "Income appears protective in this prediction.",
+    "HeartDiseaseorAttack appears protective in this prediction.",
+    "Fruits appears protective in this prediction."
+  ],
+  "priority_actions": [
+    {
+      "title": "Monitor blood pressure",
+      "priority": "High",
+      "explanation": "HighBP was an important contributor to the prediction."
+    },
+    {
+      "title": "Strengthen everyday nutrition",
+      "priority": "High",
+      "explanation": "HighBP was an important contributor to the prediction."
+    },
+    {
+      "title": "Increase safe physical activity",
+      "priority": "High",
+      "explanation": "HighBP was an important contributor to the prediction."
+    },
+    {
+      "title": "Maintain protective routines",
+      "priority": "High",
+      "explanation": "GenHlth was an important contributor to the prediction."
+    },
+    {
+      "title": "Plan healthcare follow-up",
+      "priority": "High",
+      "explanation": "GenHlth was an important contributor to the prediction."
+    }
+  ],
+  "recommendation_explanation": "The structured recommendation engine produced guidance in these categories: blood pressure, diet, exercise, general wellness, follow up, preventive screening. These items are explanatory and educational only.",
+  "next_steps": "Continue protective lifestyle habits and routine preventive care.",
+  "disclaimer": "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment.",
+  "generated_at": "2026-06-30T13:29:40.711501Z",
+  "generation_mode": "template",
+  "model": "gpt-4o-mini",
+  "source_recommendation_count": 10
+}

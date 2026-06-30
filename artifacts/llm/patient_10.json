@@ -1,0 +1,53 @@
+{
+  "patient_id": "patient_10",
+  "risk_level": "Low Risk",
+  "summary": "The model estimated this patient's diabetes risk as Low Risk with a prediction probability of 0.0680. This explanation summarizes the existing structured recommendation output.",
+  "why_this_prediction": "The main SHAP factors increasing the prediction were BMI, Sex, Age, CholCheck, MentHlth. Protective SHAP factors reducing the prediction were HighBP, HighChol, GenHlth, Income, HeartDiseaseorAttack.",
+  "positive_observations": [
+    "Physical activity is a positive lifestyle signal.",
+    "Fruit consumption is a positive nutrition signal.",
+    "Vegetable consumption is a positive nutrition signal.",
+    "Avoiding heavy alcohol consumption is a positive health indicator.",
+    "No high blood pressure indicator was observed in the patient data.",
+    "No high cholesterol indicator was observed in the patient data.",
+    "HighBP appears protective in this prediction.",
+    "HighChol appears protective in this prediction.",
+    "GenHlth appears protective in this prediction.",
+    "Income appears protective in this prediction.",
+    "HeartDiseaseorAttack appears protective in this prediction."
+  ],
+  "priority_actions": [
+    {
+      "title": "Support healthy weight management",
+      "priority": "High",
+      "explanation": "BMI was an important contributor to the prediction."
+    },
+    {
+      "title": "Strengthen everyday nutrition",
+      "priority": "High",
+      "explanation": "BMI was an important contributor to the prediction."
+    },
+    {
+      "title": "Increase safe physical activity",
+      "priority": "High",
+      "explanation": "BMI was an important contributor to the prediction."
+    },
+    {
+      "title": "Stay current with preventive screening",
+      "priority": "Medium",
+      "explanation": "Age was an important contributor to the prediction."
+    },
+    {
+      "title": "Plan healthcare follow-up",
+      "priority": "Medium",
+      "explanation": "Age was an important contributor to the prediction."
+    }
+  ],
+  "recommendation_explanation": "The structured recommendation engine produced guidance in these categories: weight management, diet, exercise, preventive screening, follow up, stress. These items are explanatory and educational only.",
+  "next_steps": "Continue protective lifestyle habits and routine preventive care.",
+  "disclaimer": "This information is generated for educational purposes only and should not be considered medical advice. Please consult a qualified healthcare professional for diagnosis or treatment.",
+  "generated_at": "2026-06-30T13:29:40.793590Z",
+  "generation_mode": "template",
+  "model": "gpt-4o-mini",
+  "source_recommendation_count": 7
+}
